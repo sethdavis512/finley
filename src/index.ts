@@ -39,7 +39,11 @@ new VoltAgent({
     workflows: {
         expenseApprovalWorkflow
     },
-    server: honoServer(),
+    server: honoServer({
+        configureApp: (app) => {
+            app.get('/health', (c) => c.json({ status: 'ok' }));
+        }
+    }),
     logger
     //   voltOpsClient: new VoltOpsClient({
     //     publicKey: process.env.VOLTAGENT_PUBLIC_KEY || "",
