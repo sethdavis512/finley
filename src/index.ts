@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import {
     VoltAgent,
-    VoltOpsClient,
+    // VoltOpsClient,
     Agent,
     Memory,
     InMemoryStorageAdapter
