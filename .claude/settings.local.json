@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__context7__resolve-library-id",
+      "mcp__context7__query-docs",
+      "Bash(bun add @voltagent/postgres)",
+      "Bash(bun remove @voltagent/libsql)",
+      "Skill(railway:environment)",
+      "Skill(railway:environment:*)",
+      "Bash(bun add -d @types/bun --cwd /Users/seth/repositories/finley)"
+    ]
+  }
+}
