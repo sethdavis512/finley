@@ -1,35 +1,21 @@
-# Build stage — needs Bun for install + build
-FROM oven/bun:1-alpine AS builder
-
-WORKDIR /app
-
-COPY package.json bun.lock ./
-RUN bun install --frozen-lockfile
-
-COPY . .
-RUN bun run build
-
-# Production stage — only needs Node to run the compiled output
-FROM node:22-alpine
+# Bun runs the TypeScript source directly — no build stage needed
+FROM oven/bun:1-alpine
 
 RUN apk add --no-cache dumb-init
 
-RUN addgroup -g 1001 -S nodejs && adduser -S nodejs -u 1001
-
 WORKDIR /app
 
 COPY package.json bun.lock ./
+RUN bun install --frozen-lockfile --production
 
-# Install production deps with npm (no Bun needed at runtime)
-RUN npm install --omit=dev --ignore-scripts
+COPY src ./src
 
-COPY --from=builder --chown=nodejs:nodejs /app/dist ./dist
+RUN addgroup -g 1001 -S bunjs && adduser -S bunjs -u 1001 \
+    && mkdir -p /app/.voltagent && chown -R bunjs:bunjs /app
 
-RUN mkdir -p /app/.voltagent && chown -R nodejs:nodejs /app
-
-USER nodejs
+USER bunjs
 
 EXPOSE 3141
 
 ENTRYPOINT ["dumb-init", "--"]
-CMD ["node", "dist/index.js"]
+CMD ["bun", "src/index.ts"]

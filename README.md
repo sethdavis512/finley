@@ -4,7 +4,7 @@
   
   <p>
     <a href="https://github.com/voltagent/voltagent"><img src="https://img.shields.io/badge/built%20with-VoltAgent-blue" alt="Built with VoltAgent" /></a>
-    <a href="https://nodejs.org"><img src="https://img.shields.io/badge/node-%3E%3D22-brightgreen" alt="Node Version" /></a>
+    <a href="https://bun.sh"><img src="https://img.shields.io/badge/bun-%3E%3D1.1-brightgreen" alt="Bun Version" /></a>
   </p>
 </div>
 
@@ -12,7 +12,7 @@
 
 ### Prerequisites
 
-- Node.js 20+ 
+- Bun 1.1+
 - Git
 - Anthropic API Key (optional - can configure later)
   - Get your key at: https://console.anthropic.com/settings/keys
@@ -25,7 +25,7 @@ git clone <your-repo-url>
 cd finley
 
 # Install dependencies
-npm install
+bun install
 
 # Copy environment variables
 cp .env.example .env
@@ -48,13 +48,10 @@ ANTHROPIC_API_KEY=your-api-key-here
 
 ```bash
 # Development mode (with hot reload)
-npm run dev
+bun run dev
 
-# Production build
-npm run build
-
-# Start production server
-npm start
+# Start production server (runs the TypeScript source directly)
+bun start
 ```
 
 ## 🎯 Features
@@ -73,7 +70,7 @@ This VoltAgent application includes:
 ### Local Development
 The VoltOps Platform provides real-time observability for your agents during development:
 
-1. **Start your agent**: Run `npm run dev`
+1. **Start your agent**: Run `bun run dev`
 2. **Open console**: Visit [console.voltagent.dev](https://console.voltagent.dev)
 3. **Auto-connect**: The console connects to your local agent at `http://localhost:3141`
 
@@ -106,7 +103,6 @@ finley/
 │   │   └── weather.ts    # Weather tool example
 │   └── workflows/        # Workflow definitions
 │       └── index.ts      # Expense approval workflow
-├── dist/                 # Compiled output (after build)
 ├── .env                  # Environment variables
 ├── .voltagent/           # Agent memory storage
 ├── Dockerfile            # Production deployment
@@ -167,10 +163,9 @@ docker-compose up
 
 ### Available Scripts
 
-- `npm run dev` - Start development server with hot reload
-- `npm run build` - Build for production
-- `npm start` - Run production build
-- `npm run volt` - VoltAgent CLI tools
+- `bun run dev` - Start development server with hot reload
+- `bun start` - Run production server
+- `bun run volt` - VoltAgent CLI tools
 
 ### Adding Custom Tools
 
